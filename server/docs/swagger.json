@@ -1,0 +1,463 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is an API that allows querying of various crime statistics pertaining to Queensland, Australia",
+    "version": "1.0.0",
+    "title": "QCDB",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "n10139281@qut.edu.au"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "172.19.11.122:80",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Authorization",
+      "description": "Dealing with user authorization"
+    },
+    {
+      "name": "Search",
+      "description": "Receiving queries and returning data"
+    },
+    {
+      "name": "Data types",
+      "description": "Info about the types of data stored in the DB"
+    }
+  ],
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "paths": {
+    "/register": {
+      "post": {
+        "tags": [
+          "Authorization"
+        ],
+        "summary": "Create a new user account",
+        "description": "",
+        "operationId": "register",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User to be created",
+            "required": true,
+            "schema": {
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "required": true,
+                  "example": "fake@mail.com"
+                },
+                "password": {
+                  "type": "string",
+                  "required": true,
+                  "example": "123go"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "yay! you've successfully registered your user account :)"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "error creating new user - you need to supply both an email and password"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "tags": [
+          "Authorization"
+        ],
+        "summary": "Validate a user before allowing them to access their account",
+        "description": "",
+        "operationId": "login",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User to validate",
+            "required": true,
+            "schema": {
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "required": true,
+                  "example": "fake@mail.com"
+                },
+                "password": {
+                  "type": "string",
+                  "required": true,
+                  "example": "123go"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "properties": {
+                "access_token": {
+                  "type": "string",
+                  "example": "18fngbuyvjkshuiewhfui9bhbubunudifbntutrnbui"
+                },
+                "expires_in": {
+                  "type": "integer",
+                  "example": "86400"
+                },
+                "token": {
+                  "type": "string",
+                  "example": "18fngbuyvjkshuiewhfui9bhbubunudifbntutrnbui"
+                },
+                "token_type": {
+                  "type": "string",
+                  "example": "Bearer"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "invalid login - you need to supply both an email and password"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/search": {
+      "get": {
+        "tags": [
+          "Search"
+        ],
+        "summary": "Send queries to the database and return data",
+        "description": "",
+        "operationId": "search",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "offence",
+            "in": "query",
+            "description": "The type of offence being queried",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "area",
+            "in": "query",
+            "description": "A list of comma separated areas to filter by",
+            "type": "string"
+          },
+          {
+            "name": "age",
+            "in": "query",
+            "description": "A list of comma spearated ages to filter by",
+            "type": "integer"
+          },
+          {
+            "name": "year",
+            "in": "query",
+            "description": "A list of comma separated years to filter",
+            "type": "integer"
+          },
+          {
+            "name": "month",
+            "in": "query",
+            "description": "A list of comma separated months to filter",
+            "type": "string"
+          },
+          {
+            "name": "gender",
+            "in": "query",
+            "description": "A list of comma separated genders to filter",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "properties": {
+                "query": {
+                  "type": "object",
+                  "properties": {
+                    "offence": {
+                      "type": "string",
+                      "example": "arson"
+                    },
+                    "area": {
+                      "type": "string",
+                      "example": "Aurukun Shire Council"
+                    },
+                    "age": {
+                      "type": "string",
+                      "example": "Adult"
+                    },
+                    "year": {
+                      "type": "interger",
+                      "example": "2005,2006"
+                    },
+                    "month": {
+                      "type": "integer",
+                      "example": "10"
+                    },
+                    "gender": {
+                      "type": "string",
+                      "example": "Male"
+                    }
+                  }
+                },
+                "result": {
+                  "type": "object",
+                  "properties": {
+                    "LGA": {
+                      "type": "string",
+                      "example": "Aurukun Shire Council"
+                    },
+                    "total": {
+                      "type": "integer",
+                      "example": "6"
+                    },
+                    "lat": {
+                      "type": "string",
+                      "example": "-27.470812"
+                    },
+                    "lng": {
+                      "type": "string",
+                      "example": "153.022455"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "oops! it looks like you're missing the offence query parm"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "oops! it looks like you're missing the authorization header"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "oh no! It looks like there was a database error while performing your search, give it another try..."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/offences": {
+      "get": {
+        "tags": [
+          "Data types"
+        ],
+        "summary": "A list of the types of offences stored",
+        "description": "",
+        "operationId": "offences",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "properties": {
+                "offences": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "example": "Advertising Prostitution, Arson, Assault"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/areas": {
+      "get": {
+        "tags": [
+          "Data types"
+        ],
+        "summary": "A list of the areas stored",
+        "description": "",
+        "operationId": "areas",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "properties": {
+                "areas": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "example": "Brisbane City Council, Gold Coast City Council"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ages": {
+      "get": {
+        "tags": [
+          "Data types"
+        ],
+        "summary": "A list of the age categories stored",
+        "description": "",
+        "operationId": "ages",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "properties": {
+                "ages": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "example": "Adult, Juvenile"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/years": {
+      "get": {
+        "tags": [
+          "Data types"
+        ],
+        "summary": "A list of the years on record",
+        "description": "",
+        "operationId": "years",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "properties": {
+                "years": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "example": "2005,2006"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/genders": {
+      "get": {
+        "tags": [
+          "Data types"
+        ],
+        "summary": "A list of the genders stored",
+        "description": "",
+        "operationId": "genders",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "properties": {
+                "genders": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "example": "Male,Female"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

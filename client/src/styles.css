@@ -1,0 +1,252 @@
+/* Simple browser reset */
+* {
+	box-sizing: border-box;
+  }
+  html,
+  body {
+	margin: 0;
+	padding: 0;
+	line-height: 1.5;
+	font-size: 16px;
+  }
+
+.passInput {
+	-webkit-text-security: disc;
+}
+
+#loader {
+	border: 16px solid #FFBA08;
+	border-radius: 50%;
+	border-top: 16px solid #3498db;
+	width: 200px;
+	height: 200px;
+	-webkit-animation: spin 2s linear infinite;
+	animation: spin 2s linear infinite;
+	position: fixed;
+	width: 200px;
+	height: 200px;
+	left: 40%;
+	top: 30%;
+}
+
+th {
+	cursor: pointer;
+	background: rgb(26, 64, 235);
+	color: #ffffff;
+	padding: 5px;
+}
+
+tr {
+	border-width: 3px;
+	border-style: solid;
+	border-color: #000000;
+}
+
+tr:nth-child(odd){
+	background: rgb(116, 184, 185);
+}
+
+tr:nth-child(even){
+	background: #ffffff;
+}
+
+@-webkit-keyframes spin {
+	0% { -webkit-transform: rotate(0deg); }
+	100% { -webkit-transform: rotate(360deg); }
+}
+  
+@keyframes spin {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+}
+
+.buttonClass {
+	cursor: pointer;
+	color: #ffffff;
+	background-color: rgb(26, 64, 235);
+	border: none;
+	border-radius: 5px;
+	padding: 5px;
+	font-weight: 800;
+	transition: 0.3s ease all;
+}
+
+.buttonClass:hover:enabled {
+	background-color: rgb(23, 55, 201);
+	-webkit-transform: scale(1.2);
+  	-ms-transform: scale(1.2);
+  	transform: scale(1.2);
+}
+
+.input {
+	background: #ffffff;
+	border-color: rgb(116, 184, 185);
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 50px;
+	padding: 3px;
+	padding-left: 15px;
+	transition: 0.3s ease all;
+}
+
+.input:focus {
+	border-color: rgb(26, 64, 235);
+	border-width: 2px;
+	background: rgb(250, 230, 179);
+	outline: none;
+}
+
+.interactive:disabled {
+	background: rgb(129, 129, 128);
+	border-color: rgb(129, 129, 128);
+}
+
+.field {
+	display: flex;
+	flex-direction: column;
+}
+
+header {
+	background: rgb(211, 214, 223);
+	background-image: linear-gradient(rgb(211, 214, 223), rgb(170, 175, 190));
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px;
+}
+
+header img {
+	height: 50px;
+	width: 150px;
+}
+
+#regForm {
+	position: fixed;
+	top: 25%;
+	background: rgba(211, 214, 223);
+	border-style: solid;
+	border-color: rgb(26, 64, 235);
+	border-width: 2px;
+	border-radius: 20px;
+	margin-left: 33%;
+	padding-left: 10px;
+	padding-right: 10px;
+	width: 33%;
+	min-height: 60%;
+	min-width: 300px;
+	text-align: center;
+}
+
+#closeRegButton {
+	margin-top: 5px;
+	margin-right: 5px;
+	display: flex;
+	justify-content: flex-end;
+}
+
+#closeRegButton button {
+	border-style: none;
+	border-radius: 50px;
+	background-color: rgb(26, 64, 235);
+	background-image: radial-gradient(rgb(26, 64, 235), rgb(12, 29, 102));
+	transition: 0.3s ease all;
+}
+
+#closeRegButton button:hover {
+	background-color: red;
+	background-image: radial-gradient(rgb(250, 49, 49), rgb(124, 4, 4));
+	-webkit-transform: scale(1.2);
+  	-ms-transform: scale(1.2);
+  	transform: scale(1.1);
+}
+
+#regFormInputs {
+	margin-top: 30px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+#hero {
+	background-image: url(img/heroImage.jpg);
+	margin: 0px;
+	padding: 0px;
+	background-size: cover;
+	min-height: 800px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.heroForm {
+	background: rgba(211, 214, 223, 0.575);
+	border-style: solid;
+	border-color: rgb(26, 64, 235);
+	border-width: 1px;
+	border-radius: 20px;
+	padding-left: 10px;
+	padding-right: 10px;
+	width: 30%;
+	min-height: 400px;
+	min-width: 250px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+}
+
+#logFormInputs {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+#search form {
+	border-radius: 3px;
+	background: rgb(211, 214, 223);
+	padding: 10px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.tableClass {
+	max-height: 200px;
+	width: 50%;
+	display: flex;
+	justify-content: center;
+	overflow: auto;
+	border-radius: 10px;
+	border-color: rgb(116, 184, 185);
+	border-style: solid;
+}
+
+.tableClass table {
+	width: 100%;
+}
+
+#results {
+	width: 100%;
+	background: rgb(211, 214, 223);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 50px;
+}
+
+footer {
+	color: #ffffff;
+	background-color: #000000;
+	margin: 0;
+	padding: 0;
+	height: 100px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}

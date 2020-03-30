@@ -1,0 +1,19 @@
+[req]
+distinguished_name = req_distinguished_name
+x509_extensions = v3_req
+prompt = no
+[req_distinguished_name]
+C = AU
+ST = Queensland
+L = Brisbane
+O = QUT
+OU = CAB230
+CN = myCert
+[v3_req]
+keyUsage = critical, digitalSignature, keyAgreement
+extendedKeyUsage = serverAuth
+subjectAltName = @alt_names
+[alt_names]
+DNS.1 = myCertificate
+DNS.2 = myCert
+DNS.3 = cert
